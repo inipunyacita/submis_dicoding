@@ -11,8 +11,14 @@ const searchBuku = document.getElementById("searchBook");
 const statusBelumBaca = document.getElementById("incompleteBookshelfList");
 // list buku selesai dibaca
 const statusSudahBaca = document.getElementById("completeBookshelfList");
+// data buku
+const dataBuku = {
+  judul: localStorage.getItem("judul"),
+  penulis: localStorage.getItem("penulis"),
+  tahun: localStorage.getItem("tahun"),
+};
 
-// add data buku
+// create & show data buku
 submitBuku.addEventListener("click", function (e) {
   e.preventDefault();
   localStorage.setItem("judul", judulBuku.value);
@@ -20,9 +26,19 @@ submitBuku.addEventListener("click", function (e) {
   localStorage.setItem("tahun", tahunBuku.value);
   if (statusBaca.checked) {
     localStorage.setItem("status", true);
+    const bookReport = document.createElement("p");
+    bookReport.innerText = `Judul : ${dataBuku.judul}
+    Penulis: ${dataBuku.penulis}
+    Tahun: ${dataBuku.tahun}
+    `;
+    statusSudahBaca.appendChild(bookReport);
   } else {
     localStorage.setItem("status", false);
+    const bookReport = document.createElement("p");
+    bookReport.innerText = `Judul : ${dataBuku.judul}
+    Penulis: ${dataBuku.penulis}
+    Tahun: ${dataBuku.tahun}
+    `;
+    statusBelumBaca.appendChild(bookReport);
   }
 });
-
-// read data buku
