@@ -1,44 +1,21 @@
-// inisialisasi variabel
-// form buku
-const judulBuku = document.getElementById("inputBookTitle");
-const penulisBuku = document.getElementById("inputBookAuthor");
-const tahunBuku = document.getElementById("inputBookYear");
-const statusBaca = document.getElementById("inputBookIsComplete");
-const submitBuku = document.getElementById("bookSubmit");
-// form search buku
-const searchBuku = document.getElementById("searchBook");
-// list buku belum selesai dibaca
-const statusBelumBaca = document.getElementById("incompleteBookshelfList");
-// list buku selesai dibaca
-const statusSudahBaca = document.getElementById("completeBookshelfList");
-// data buku
-const dataBuku = {
-  judul: localStorage.getItem("judul"),
-  penulis: localStorage.getItem("penulis"),
-  tahun: localStorage.getItem("tahun"),
-};
+document.addEventListener("DOMContentLoaded", () => {
+  // inisialisasi form
+  const submitBuku = document.getElementById("inputBook");
+  const submitSearch = document.getElementById("searchBook");
 
-// create & show data buku
-submitBuku.addEventListener("click", function (e) {
-  e.preventDefault();
-  localStorage.setItem("judul", judulBuku.value);
-  localStorage.setItem("penulis", penulisBuku.value);
-  localStorage.setItem("tahun", tahunBuku.value);
-  if (statusBaca.checked) {
-    localStorage.setItem("status", true);
-    const bookReport = document.createElement("p");
-    bookReport.innerText = `Judul : ${dataBuku.judul}
-    Penulis: ${dataBuku.penulis}
-    Tahun: ${dataBuku.tahun}
-    `;
-    statusSudahBaca.appendChild(bookReport);
-  } else {
-    localStorage.setItem("status", false);
-    const bookReport = document.createElement("p");
-    bookReport.innerText = `Judul : ${dataBuku.judul}
-    Penulis: ${dataBuku.penulis}
-    Tahun: ${dataBuku.tahun}
-    `;
-    statusBelumBaca.appendChild(bookReport);
-  }
+  // make the form not reload after submited
+  submitBuku.addEventListener("submit", (e) => {
+    e.preventDefault();
+    addBook();
+    const dataBuku = addBook();
+    const div = document.createElement("article");
+    div.classList.add("book_item");
+    const h3 = document.createElement("h3");
+    h3.innerText = dataBuku.id;
+    div.appendChild(h3);
+  });
+  submitSearch.addEventListener("submit", (e) => {
+    e.preventDefault();
+    searchBook();
+  });
 });
