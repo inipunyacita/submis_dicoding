@@ -16,7 +16,7 @@ const addBook = () => {
   dataBuku.push(bookObject);
 
   document.dispatchEvent(new Event(RENDER_EVENT));
-  localStorage.setItem(bookData, JSON.stringify(dataBuku));
+  localStorage.setItem("dataBuku", JSON.stringify(dataBuku));
 };
 // function for generated ID
 const genedrateID = () => {
